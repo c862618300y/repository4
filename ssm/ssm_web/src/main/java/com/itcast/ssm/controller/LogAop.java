@@ -33,16 +33,16 @@ public class LogAop {
     /**
      * 切点表达式
      */
-   /* @Pointcut("")
+    @Pointcut("execution(* com.itcast.ssm.controller.*.*(..))")
     public void p() {
-    }*/
+    }
 
     /**
      * 前置通知 获取访问的开始时间、执行的类和执行的方法
      *
      * @param jp
      */
-    @Before("execution(* com.itcast.ssm.controller.*.*(..))")
+    @Before("p()")
     public void doBefore(JoinPoint jp) throws Exception {
         visitTime = new Date();//1.获取访问开始时间
         clazz = jp.getTarget().getClass();//2.获取当前访问的具体类
@@ -65,7 +65,7 @@ public class LogAop {
      *
      * @param jp
      */
-    @After("execution(* com.itcast.ssm.controller.*.*(..))")
+    @After("p()")
     public void doAfter(JoinPoint jp) throws Exception {
         long burnTime = new Date().getTime() - visitTime.getTime();//1.获取访问时长
         String url = "";//2.访问的url
